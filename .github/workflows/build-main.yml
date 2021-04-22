@@ -20,4 +20,4 @@ jobs:
     - name: Create test db
       run: docker run --rm --network kimai-test --name kimai-mysql-testing -e MYSQL_DATABASE=kimai -e MYSQL_USER=kimai -e MYSQL_PASSWORD=kimai -e MYSQL_ROOT_PASSWORD=kimai -p 3399:3306 -d mysql
     - name: Test the image
-      run: docker run --rm --network kimai-test --name kimai-test-fpm-master-prod -ti -e DATABASE_URL=mysql://kimai:kimai@kimai-mysql-testing:3306/kimai --entrypoint /self-test.sh kimai/kimai2:fpm-master-prod
+      run: docker run --rm --network kimai-test --name kimai-test-fpm-master-prod -i -e DATABASE_URL=mysql://kimai:kimai@kimai-mysql-testing:3306/kimai --entrypoint /self-test.sh kimai/kimai2:fpm-master-prod
