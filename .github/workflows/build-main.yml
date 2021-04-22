@@ -2,9 +2,9 @@ name: Build main
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, gh-actions ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, gh-actions ]
 
 jobs:
   build:
