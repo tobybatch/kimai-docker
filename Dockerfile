@@ -35,7 +35,7 @@ FROM composer:2.1.3 AS composer
 ###########################
 
 #fpm alpine php extension base
-FROM php:7.4.15-fpm-alpine3.13 AS fpm-php-ext-base
+FROM php:8.0.8-fpm-alpine3.13 AS fpm-php-ext-base
 RUN apk add --no-cache \
     # build-tools
     autoconf \
@@ -70,7 +70,7 @@ RUN apk add --no-cache \
 
 
 # apache debian php extension base
-FROM php:7.4.15-apache-buster AS apache-php-ext-base
+FROM php:8.0.8-fpm-alpine3.13 AS apache-php-ext-base
 RUN apt-get update
 RUN apt-get install -y \
         libldap2-dev \
@@ -115,7 +115,7 @@ RUN docker-php-ext-install -j$(nproc) xsl
 ###########################
 
 # fpm base build
-FROM php:7.4.15-fpm-alpine3.13 AS fpm-base
+FROM php:8.0.8-fpm-alpine3.13 AS fpm-base
 RUN apk add --no-cache \
         bash \
         coreutils \
@@ -145,7 +145,7 @@ HEALTHCHECK --interval=20s --timeout=10s --retries=3 \
 # apache base build
 ###########################
 
-FROM php:7.4.15-apache-buster AS apache-base
+FROM php:8.0.8-fpm-alpine3.13 AS apache-base
 COPY assets/000-default.conf /etc/apache2/sites-available/000-default.conf
 RUN apt-get update && \
     apt-get install -y \
